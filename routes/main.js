@@ -6,7 +6,7 @@ router.get('/', async (req, res) => {
   let products;
   try {
     products = await Product.findAll({ order: [['id', 'DESC']] });
-    console.log('entries---->', products);
+    // console.log('entries---->', products);
     return res.render('main', { products });
   } catch (error) {
     return res.render('error', {
@@ -17,5 +17,6 @@ router.get('/', async (req, res) => {
 });
 
 // * отправить свой пост
+
 
 module.exports = router;
