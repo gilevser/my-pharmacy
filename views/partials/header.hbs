@@ -2,14 +2,14 @@
     <nav class=" container navbar navbar-expand-sm bg-light">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <h2 class="p-2">LOGO  </h2>
+          <h2 class="p-2"><a href="/">LOGO  </a></h2>
         </li>
         {{#if username}} {{! ключ username ищется в res.locals}}
         <li class="nav-item">
           <a class="nav-link" href="#">Привет, {{username}}</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="??????">Акции</a>
+          <a class="nav-link" href="/promo">Акции</a>
         </li> 
         <li class="nav-item">
           <a class="nav-link" href="/lk">Личный кабинет</a>
@@ -17,6 +17,12 @@
         <li class="nav-item">
           <a class="nav-link" href="/auth/signout">Выйти</a>
         </li>
+         <li class="nav-item">
+          <span class="cart">
+            <a class="nav-link cart-link" href="/cart">Корзина</a>
+            <span class="cart-count">5</span>
+          </span>
+        </li> 
         {{else}}
         <li class="nav-item p-2 gx-5">
           <a class="nav-link" href="/auth/signin">Войти</a>
