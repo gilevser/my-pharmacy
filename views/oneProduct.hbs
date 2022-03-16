@@ -3,12 +3,15 @@
 
 <h4>{{product.title}}</h4>
 <div class="flex">
-  <img src="{{product.img}}" alt="item img" class="item-img">
+  <div class="item-img">
+    <img src="{{product.img}}" alt="item img" >
+  </div>
+  
   <div class="item-descr">
     <p>{{product.description}}</p>
     <p>{{product.price}} руб.</p>
     <p>Остаток на складе: {{product.quanity}} шт.</p>
-    <button class="item-descr-elem btn btn-outline-primary">Добавить в корзину</button>
+    <button class="item-descr-elem btn btn-outline-primary addToCartBtn">Добавить в корзину</button>
   </div>
 </div>
 
