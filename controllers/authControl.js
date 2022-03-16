@@ -19,7 +19,7 @@ exports.createUserAndSession = async (req, res, next) => {
       email,
       password: hashedPassword,
     });
-    const now = new Date();
+    const now = new Date().toLocaleDateString();
     // записываем в req.session.user данные (id & name) (создаем сессию)
     req.session.user = { id: user.id, name: user.login, createdAt: now };
     console.log('req.session----->', req.session);

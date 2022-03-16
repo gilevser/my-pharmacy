@@ -16,6 +16,7 @@ const authRouter = require('./routes/auth');
 const lkRouter = require('./routes/lk');
 const addProductRouter = require('./routes/addProduct');
 
+
 // * импорт контроллеров
 const notFoundPage = require('./controllers/notfoundpage');
 
