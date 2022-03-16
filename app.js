@@ -36,20 +36,23 @@ const sessionConfig = {
     httpOnly: true,
   },
 };
-app.use(session(sessionConfig));
 
+app.set('view engine', 'hbs');
+hbs.registerPartials(`${__dirname}/views/partials`);
 app.use(express.static(path.join(__dirname, 'public')));
 
 // * подключение hbs
-hbs.registerPartials(`${__dirname}/views/partials`);
-app.set('view engine', 'hbs');
-app.set('views', path.join(__dirname, 'views'));
+
+// app.set('views', path.join(__dirname, 'views'));
 
 app.use(morgan('dev'));
-app.use(express.json());
+
+app.use(session(sessionConfig));
 
 // app.use(getNameLocals);
 app.use(express.urlencoded({ extended: true }));
+
+app.use(express.json());
 
 /*  сохраняем в обьект res.locals.username
 имя пользователя для использования username в layout.hbs */

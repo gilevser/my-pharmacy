@@ -18,5 +18,4 @@ router.get('/', async (req, res) => {
 
 // * отправить свой пост
 
-
 module.exports = router;
