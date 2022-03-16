@@ -37,6 +37,8 @@ const sessionConfig = {
 };
 app.use(session(sessionConfig));
 
+app.use(express.static(path.join(__dirname, 'public')));
+
 // * подключение hbs
 hbs.registerPartials(`${__dirname}/views/partials`);
 app.set('view engine', 'hbs');
@@ -47,7 +49,6 @@ app.use(express.json());
 
 // app.use(getNameLocals);
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public')));
 
 /*  сохраняем в обьект res.locals.username
 имя пользователя для использования username в layout.hbs */
