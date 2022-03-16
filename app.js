@@ -13,12 +13,18 @@ const dbcheck = require('./db/dbcon');
 const indexRouter = require('./routes/index');
 const mainRoutes = require('./routes/main');
 const authRouter = require('./routes/auth');
+<<<<<<< HEAD
+const lkRouter = require('./routes/lk');
+const addProductRouter = require('./routes/addProduct');
+
+=======
 const promoRouter = require('./routes/promo')
 const oneProdRouter = require('./routes/oneProduct');
+>>>>>>> dev
 
 // * импорт контроллеров
 const notFoundPage = require('./controllers/notfoundpage');
-// const { getNameLocals } = require('./middleware/localUserName');
+
 
 const { PORT } = process.env;
 
@@ -50,7 +56,7 @@ app.use(morgan('dev'));
 
 app.use(session(sessionConfig));
 
-// app.use(getNameLocals);
+
 app.use(express.urlencoded({ extended: true }));
 
 app.use(express.json());
@@ -59,6 +65,7 @@ app.use(express.json());
 имя пользователя для использования username в layout.hbs */
 app.use((req, res, next) => {
   res.locals.username = req.session?.user?.name;
+  res.locals.data = req.session?.user?.createdAt;
 
   console.log('\n\x1b[33m', 'req.session.user :', req.session.user);
   console.log('\x1b[35m', 'res.locals.username:', res.locals.username);
@@ -69,6 +76,8 @@ app.use((req, res, next) => {
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use('/main', mainRoutes);
+app.use('/lk', lkRouter);
+app.use('/addProduct', addProductRouter);
 app.use('/promo', promoRouter)
 app.use('/product', oneProdRouter);
 
