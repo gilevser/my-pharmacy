@@ -16,7 +16,6 @@ const authRouter = require('./routes/auth');
 
 // * импорт контроллеров
 const notFoundPage = require('./controllers/notfoundpage');
-// const { getNameLocals } = require('./middleware/localUserName');
 
 const { PORT } = process.env;
 
@@ -37,11 +36,12 @@ const sessionConfig = {
 };
 app.use(session(sessionConfig));
 
-app.use(express.static(path.join(__dirname, 'public')));
-
 // * подключение hbs
-hbs.registerPartials(`${__dirname}/views/partials`);
 app.set('view engine', 'hbs');
+
+hbs.registerPartials(`${__dirname}/views/partials`);
+
+app.use(express.static(path.join(__dirname, 'public')));
 app.set('views', path.join(__dirname, 'views'));
 
 app.use(morgan('dev'));
