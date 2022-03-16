@@ -13,10 +13,12 @@ const dbcheck = require('./db/dbcon');
 const indexRouter = require('./routes/index');
 const mainRoutes = require('./routes/main');
 const authRouter = require('./routes/auth');
+const lkRouter = require('./routes/lk');
+const addProductRouter = require('./routes/addProduct');
 
 // * импорт контроллеров
 const notFoundPage = require('./controllers/notfoundpage');
-// const { getNameLocals } = require('./middleware/localUserName');
+
 
 const { PORT } = process.env;
 
@@ -47,13 +49,14 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(morgan('dev'));
 app.use(express.json());
 
-// app.use(getNameLocals);
+
 app.use(express.urlencoded({ extended: true }));
 
 /*  сохраняем в обьект res.locals.username
 имя пользователя для использования username в layout.hbs */
 app.use((req, res, next) => {
   res.locals.username = req.session?.user?.name;
+  res.locals.data = req.session?.user?.createdAt;
 
   console.log('\n\x1b[33m', 'req.session.user :', req.session.user);
   console.log('\x1b[35m', 'res.locals.username:', res.locals.username);
@@ -64,6 +67,8 @@ app.use((req, res, next) => {
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use('/main', mainRoutes);
+app.use('/lk', lkRouter);
+app.use('/addProduct', addProductRouter);
 
 // * роут если нет страницы
 app.use(notFoundPage);
