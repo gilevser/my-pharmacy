@@ -18,13 +18,5 @@ router.get('/', async (req, res) => {
 
 // * отправить свой пост
 
-router.get('/products/:id', async (req, res) => {
-  console.log(req.params);
-  // const { id } = req.params;
-  // const product = await Product.findOne({ where: { id }, raw: true });
-  // console.log(product);
-  // res.render('oneProduct', { product });
-  res.render('/');
-});
 
 module.exports = router;
