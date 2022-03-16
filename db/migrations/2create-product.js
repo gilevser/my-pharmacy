@@ -24,6 +24,15 @@ module.exports = {
       quanity: {
         type: Sequelize.INTEGER,
       },
+      denomination_id: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: 'Denominations'
+          },
+          key: 'id'
+        }
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
