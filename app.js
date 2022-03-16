@@ -13,6 +13,7 @@ const dbcheck = require('./db/dbcon');
 const indexRouter = require('./routes/index');
 const mainRoutes = require('./routes/main');
 const authRouter = require('./routes/auth');
+const promoRouter = require('./routes/promo')
 
 // * импорт контроллеров
 const notFoundPage = require('./controllers/notfoundpage');
@@ -64,6 +65,7 @@ app.use((req, res, next) => {
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use('/main', mainRoutes);
+app.use('/promo', promoRouter)
 
 // * роут если нет страницы
 app.use(notFoundPage);
