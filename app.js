@@ -13,18 +13,15 @@ const dbcheck = require('./db/dbcon');
 const indexRouter = require('./routes/index');
 const mainRoutes = require('./routes/main');
 const authRouter = require('./routes/auth');
-<<<<<<< HEAD
 const lkRouter = require('./routes/lk');
 const addProductRouter = require('./routes/addProduct');
+const cartRouter = require('./routes/cart');
 
-=======
-const promoRouter = require('./routes/promo')
+const promoRouter = require('./routes/promo');
 const oneProdRouter = require('./routes/oneProduct');
->>>>>>> dev
 
 // * импорт контроллеров
 const notFoundPage = require('./controllers/notfoundpage');
-
 
 const { PORT } = process.env;
 
@@ -56,7 +53,6 @@ app.use(morgan('dev'));
 
 app.use(session(sessionConfig));
 
-
 app.use(express.urlencoded({ extended: true }));
 
 app.use(express.json());
@@ -78,8 +74,9 @@ app.use('/auth', authRouter);
 app.use('/main', mainRoutes);
 app.use('/lk', lkRouter);
 app.use('/addProduct', addProductRouter);
-app.use('/promo', promoRouter)
+app.use('/promo', promoRouter);
 app.use('/product', oneProdRouter);
+app.use('/cart', cartRouter);
 
 // * роут если нет страницы
 app.use(notFoundPage);
