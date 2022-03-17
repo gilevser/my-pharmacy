@@ -18,6 +18,7 @@ products?.addEventListener('click', async (e) => { // слушатель на в
   if (e.target.tagName === 'BUTTON') { // находим кнопку
     // добавляем в local storage id товаров по нажатию на кнопку:
     itemsArray.push(e.target.id);
+    console.log(itemsArray);
     localStorage.setItem('items', JSON.stringify(itemsArray));
     // крутим счетчик товаров в корзине по нажатию на кнопку:
     counter += 1;
