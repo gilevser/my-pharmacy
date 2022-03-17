@@ -25,3 +25,31 @@ formPromo?.addEventListener('submit', async e => {
         })
     }
 })
+
+// Листаем слайды акций
+const  slidesPromo  = ( activeSlide = 1) => {
+    const slides = document.querySelectorAll('.slidePromo')
+    slides[activeSlide].classList.add('activePromo')
+
+    for ( let slide of slides) {
+        slide.addEventListener('click', () => {
+            clearActiveClasses()
+
+            slide.classList.add('activePromo')
+        })
+    }
+
+    function clearActiveClasses() {
+        slides.forEach( slide => {
+            slide.classList.remove('activePromo')
+        })
+    }
+
+
+
+}
+
+slidesPromo()
+
+
+

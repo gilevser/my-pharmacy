@@ -3,14 +3,31 @@ const {Sale, Product, ProductSale} = require('../db/models')
 
 // *Страница с акциями
 router.get('/', async (req, res) => {
-    const actualPromo = await ProductSale.findAll({ include: [{
-        model: Product,
-            attributes: ['img']
+
+    const actualDate = new Date()
+    const allSale = await Sale.findAll({raw: true})
+    // Получаем актуальную акцию!!!
+    const actualSale = allSale.filter(el => {
+       return el.start <= actualDate && el.end >= actualDate
+    })
+    console.log(actualSale[0].id)
+
+    //Получаем все акционные товары
+    const allPromoProduct = await ProductSale.findAll({include: [{
+            model: Product,
+            attributes: ['title', 'description', 'img']
         }]})
+    // Товары участвующие в  акции
+    const actualPromoProduct = allPromoProduct.filter( product => product['sale_id'] === actualSale[0].id)
+    const previousPromoProduct = allPromoProduct.filter( product => product['sale_id'] === actualSale[0].id - 1)
+    const nextPromoProduct = allPromoProduct.filter( product => product['sale_id'] === actualSale[0].id + 1)
 
-    console.log(actualPromo)
 
-    res.render('promo', {actualPromo})
+
+
+
+
+    res.render('promo', {previousPromoProduct ,actualPromoProduct, nextPromoProduct})
 })
 
 router.post('/', async (req, res) => {

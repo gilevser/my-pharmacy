@@ -13,11 +13,13 @@ const dbcheck = require('./db/dbcon');
 const indexRouter = require('./routes/index');
 const mainRoutes = require('./routes/main');
 const authRouter = require('./routes/auth');
+
 const lkRouter = require('./routes/lk');
 const addProductRouter = require('./routes/addProduct');
 const cartRouter = require('./routes/cart');
 
-const promoRouter = require('./routes/promo');
+
+const promoRouter = require('./routes/promo')
 const oneProdRouter = require('./routes/oneProduct');
 
 // * импорт контроллеров
