@@ -13,6 +13,7 @@ const dbcheck = require('./db/dbcon');
 const indexRouter = require('./routes/index');
 const mainRoutes = require('./routes/main');
 const authRouter = require('./routes/auth');
+
 const lkRouter = require('./routes/lk');
 const addProductRouter = require('./routes/addProduct');
 const cartRouter = require('./routes/cart');
@@ -21,7 +22,7 @@ const oneProdRouter = require('./routes/oneProduct');
 const lkEditRouter = require('./routes/lkEdit');
 
 // * импорт контроллеров
-const notFoundPage = require('./controllers/notfoundpage'); //тупой копипаст - плохо!
+const notFoundPage = require('./controllers/notfoundpage'); //тупой копипаст - плохо!:))
 
 const { PORT } = process.env;
 

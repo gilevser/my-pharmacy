@@ -16,12 +16,6 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/fetch', async (req, res) => {
-  const products = await Product.findAll({ raw: true });
-  console.log('fetch hello');
-  res.json({ products });
-});
-
 // * отправить свой пост
 
 module.exports = router;
