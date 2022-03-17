@@ -59,3 +59,9 @@ const allProd = async () => {
 };
 
 allProd();
+
+const clearCart = document.querySelector('.clearCart');
+clearCart.addEventListener('click', (e) => {
+  localStorage.clear();
+  window.location.reload();
+});
