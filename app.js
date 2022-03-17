@@ -17,13 +17,12 @@ const authRouter = require('./routes/auth');
 const lkRouter = require('./routes/lk');
 const addProductRouter = require('./routes/addProduct');
 const cartRouter = require('./routes/cart');
-
-
-const promoRouter = require('./routes/promo')
+const promoRouter = require('./routes/promo');
 const oneProdRouter = require('./routes/oneProduct');
+const lkEditRouter = require('./routes/lkEdit');
 
 // * импорт контроллеров
-const notFoundPage = require('./controllers/notfoundpage');
+const notFoundPage = require('./controllers/notfoundpage'); //тупой копипаст - плохо!:))
 
 const { PORT } = process.env;
 
@@ -64,9 +63,13 @@ app.use(express.json());
 app.use((req, res, next) => {
   res.locals.username = req.session?.user?.name;
   res.locals.data = req.session?.user?.createdAt;
+  res.locals.id = req.session?.user?.id;
+  res.locals.userEmail = req.session?.user?.email;
+  // res.locals.userEmail = req.session?.user?.email;
+  // console.log(req.session?.user?.email, 'req.session?.user?.email лежит тут <=====');
 
-  console.log('\n\x1b[33m', 'req.session.user :', req.session.user);
-  console.log('\x1b[35m', 'res.locals.username:', res.locals.username);
+  // console.log('\n\x1b[33m', 'req.session.user :', req.session.user);
+  // console.log('\x1b[35m', 'res.locals.username:', res.locals.username);
   next();
 });
 
@@ -79,6 +82,7 @@ app.use('/addProduct', addProductRouter);
 app.use('/promo', promoRouter);
 app.use('/product', oneProdRouter);
 app.use('/cart', cartRouter);
+app.use('/lkEdit', lkEditRouter);
 
 // * роут если нет страницы
 app.use(notFoundPage);
@@ -105,9 +109,14 @@ app.use((err, req, res, next) => {
   /* Задаём в будущем ответе статус ошибки.
   Берём его из объекта ошибки, если он там есть.
   В противно случае записываем универсальный стату ошибки на сервере - 500. */
+  // console.log(error, 'это ошибка из app');
   res.status(err.status || 500);
   // Формируем HTML-текст из шаблона "error.hbs" и отправляем его на клиент в качестве ответа.
   res.render('error');
+});
+
+app.get('*', (req, res) => {
+  res.redirect('/main');
 });
 
 app.listen(PORT ?? 3000, () => {
