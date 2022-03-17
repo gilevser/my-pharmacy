@@ -22,9 +22,10 @@ const allProd = async () => {
         <div class="col-md-8">
         <div class="card-body">
           <a href="/product/${itemToAdd.id}"><h5 class="card-title">${itemToAdd.title}</h5></a>
-          <p class="card-text">${itemToAdd.price} рублей</p>
+          <p class="card-text">${itemToAdd.price} руб./шт.</p>
           <p class="card-text"><small class="text-success">Описание: ${itemToAdd.description}</small></p>
           <p id="quantityInCart-${itemToAdd.id}" class="card-text"><small class="text-muted">Количество в корзине: ${itemToAdd.quantityInCart} шт.</small></p>
+          <p id="price-${itemToAdd.id}"class="card-text">${itemToAdd.price * itemToAdd.quantityInCart} руб.</p>
         </div>
         </div>
       </div>
@@ -34,18 +35,27 @@ const allProd = async () => {
       itemToAdd.quantityInCart += 1;
       const x = document.getElementById(`quantityInCart-${itemToAdd.id}`);
       x.innerHTML = `<p id="quantityInCart-${itemToAdd.id}" class="card-text"><small class="text-muted">Количество в корзине: ${itemToAdd.quantityInCart} шт.</small></p>`;
+      const y = document.getElementById(`price-${itemToAdd.id}`);
+      y.innerHTML = `<p id="price-${itemToAdd.id}"class="card-text">${itemToAdd.price * itemToAdd.quantityInCart} руб.</p>`;
     }
   }
   console.log(addedItems);
   // console.log(addedItems.length);
-  console.log(addedItems[1].quantityInCart);
-  // const totalQuantity = addedItems.map((accumulator, curr) => accumulator + curr.quantityInCart);
-  const totalQuantity = 0;
-  for (let i = 0; i < addedItems.length; i += 1) {
-    console.log(addedItems[i].quantityInCart);
-    totalQuantity += addedItems[i].quantityInCart;
-  }
-  console.log(totalQuantity);
+
+  let totalQuantity = 0;
+  addedItems.forEach((element) => {
+    totalQuantity += element.quantityInCart;
+  });
+
+  let totalPrice = 0;
+  addedItems.forEach((element) => {
+    totalPrice += element.price;
+  });
+
+  const total = document.createElement('div');
+  total.innerHTML = `<p>Общее кол-во: ${totalQuantity} шт.</p>
+  <p>Сумма заказа: ${totalPrice} руб.</p>`;
+  document.getElementById('cart-totals').appendChild(total);
 };
 
 allProd();
