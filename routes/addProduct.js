@@ -17,7 +17,7 @@ router.post('/', async (req, res) => {
     quanity: productQuantity,
     denomination_id: productCategory,
   });
-  res.json(newProduct.dataValues);
+  // res.json(newProduct.dataValues);
   res.redirect('/');
 });
 
