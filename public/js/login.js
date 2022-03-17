@@ -33,7 +33,7 @@ document.querySelector('#password').addEventListener('focus', (e) => {
     },
   });
 });
-document.querySelector('#submit').addEventListener('focus', (e) => {
+document.querySelector('#submit1').addEventListener('focus', (e) => {
   if (current) current.pause();
   current = anime({
     targets: 'path',

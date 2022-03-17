@@ -119,11 +119,12 @@ label {
 .input::-moz-focus-inner {
   border: 0;
 }
-#submit1 {
+#submit {
+  background: transparent;
+  border: 0;
   width: 240px;
-  padding-top: 8px;
+  padding-top: 10px;
   color: #707075;
-  margin-top: 20px;
   transition: color 300ms;
 }
 #submit1:focus {
