@@ -1,26 +1,27 @@
 <br>
 <br>
 <h4>Пилюли </h4>
-
-<div class="products">
+  
+<div class="order products">
 {{#each products}}
-<div class="row">
-<div class="card mb-3" style="max-width: 540px;">
-    <div class="row g-0">
-      <div class="col-md-4">
+  <div class="card bg-light mb-3" style="max-width: 450px;">
+     <div class="row g-0 truo">
+   
+       <div class="col-md-4">
         <a href="/product/{{id}}"><img src={{img}} class="img-fluid rounded-start" alt=""></a>
+       </div>
+
+          <div class="col-md-8">
+          <div class="card-body">
+           <h5 class="card-title">{{title}}</h5>
+            <p class="card-text">{{price}} рублей</p>
+            <p class="card-text"><small class="text-success">Описание: {{description}}</small></p>
+            <p class="card-text"><small class="text-muted">Количество: {{quanity}}</small></p>
+            <p class="card-text"><small class="text-muted">ТУТ ДОЛЖНА БЫТЬ КАТЕГОРИЯ {{denomination_id}}</small></p>
+            <button id="{{id}}" class="btn btn-outline-primary addToCartBtn">Добавить в корзину</button>
+          </div>
+          </div>
       </div>
-      <div class="col-md-8">
-        <div class="card-body">
-          <a href="/product/{{id}}"><h5 class="card-title">{{title}}</h5></a>
-          <p class="card-text">{{price}} рублей</p>
-          <p class="card-text"><small class="text-muted">Описание: {{description}}</small></p>
-          <p class="card-text"><small class="text-muted">Количество: {{quanity}}</small></p>
-          <p class="card-text"><small class="text-muted">ТУТ ДОЛЖНА БЫТЬ КАТЕГОРИЯ {{denomination_id}}</small></p>
-          <button id="{{id}}" class="btn btn-outline-primary addToCartBtn">Добавить в корзину</button>
-        </div>
-      </div>
-    </div>
-</div>
+  </div>
 {{/each}}
 </div>

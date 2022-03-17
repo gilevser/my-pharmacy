@@ -1,0 +1,11 @@
+.head {
+  margin: 30px;
+  width: auto;
+  background-color: #f8f9fa;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+.dt {
+  margin-left: 20px;
+}
