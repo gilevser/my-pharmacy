@@ -9,6 +9,7 @@ router.post('/', async (req, res) => {
   const {
     productName, productPrice, productDescription, productImg, productQuantity, productCategory,
   } = req.body;
+  console.log(productImg, 'productImg==============>');
   const newProduct = await Product.create({
     title: productName,
     price: productPrice,
@@ -17,6 +18,7 @@ router.post('/', async (req, res) => {
     quanity: productQuantity,
     denomination_id: productCategory,
   });
+ 
   // res.json(newProduct.dataValues);
   res.redirect('/');
 });
