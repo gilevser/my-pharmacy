@@ -4,30 +4,30 @@ const {Sale, Product, ProductSale} = require('../db/models')
 // *Страница с акциями
 router.get('/', async (req, res) => {
 
+
+
     const actualDate = new Date()
     const allSale = await Sale.findAll({raw: true})
-    // Получаем актуальную акцию!!!
-    const actualSale = allSale.filter(el => {
-       return el.start <= actualDate && el.end >= actualDate
-    })
-    console.log(actualSale[0].id)
+    console.log(allSale.length === 0)
+    if ( allSale.length === 0) {
+        res.render('promo')
+    } else {
+        // Получаем актуальную акцию!!!
+        const actualSale = allSale.filter(el => {
+            return el.start <= actualDate && el.end >= actualDate
+        })
 
-    //Получаем все акционные товары
-    const allPromoProduct = await ProductSale.findAll({include: [{
-            model: Product,
-            attributes: ['title', 'description', 'img']
-        }]})
-    // Товары участвующие в  акции
-    const actualPromoProduct = allPromoProduct.filter( product => product['sale_id'] === actualSale[0].id)
-    const previousPromoProduct = allPromoProduct.filter( product => product['sale_id'] === actualSale[0].id - 1)
-    const nextPromoProduct = allPromoProduct.filter( product => product['sale_id'] === actualSale[0].id + 1)
-
-
-
-
-
-
-    res.render('promo', {previousPromoProduct ,actualPromoProduct, nextPromoProduct})
+        //Получаем все акционные товары
+        const allPromoProduct = await ProductSale.findAll({include: [{
+                model: Product,
+                attributes: ['title', 'description', 'img']
+            }]})
+        // Товары участвующие в  акции
+        const actualPromoProduct = allPromoProduct.filter( product => product['sale_id'] === actualSale[0].id)
+        const previousPromoProduct = allPromoProduct.filter( product => product['sale_id'] === actualSale[0].id - 1)
+        const nextPromoProduct = allPromoProduct.filter( product => product['sale_id'] === actualSale[0].id + 1)
+        res.render('promo', {previousPromoProduct ,actualPromoProduct, nextPromoProduct})
+    }
 })
 
 router.post('/', async (req, res) => {
