@@ -13,6 +13,12 @@ const dbcheck = require('./db/dbcon');
 const indexRouter = require('./routes/index');
 const mainRoutes = require('./routes/main');
 const authRouter = require('./routes/auth');
+const lkRouter = require('./routes/lk');
+const addProductRouter = require('./routes/addProduct');
+const cartRouter = require('./routes/cart');
+
+const promoRouter = require('./routes/promo');
+const oneProdRouter = require('./routes/oneProduct');
 
 // * импорт контроллеров
 const notFoundPage = require('./controllers/notfoundpage');
@@ -34,26 +40,28 @@ const sessionConfig = {
     httpOnly: true,
   },
 };
-app.use(session(sessionConfig));
+
+app.set('view engine', 'hbs');
+hbs.registerPartials(`${__dirname}/views/partials`);
+app.use(express.static(path.join(__dirname, 'public')));
 
 // * подключение hbs
-app.set('view engine', 'hbs');
 
-hbs.registerPartials(`${__dirname}/views/partials`);
-
-app.use(express.static(path.join(__dirname, 'public')));
-app.set('views', path.join(__dirname, 'views'));
+// app.set('views', path.join(__dirname, 'views'));
 
 app.use(morgan('dev'));
-app.use(express.json());
 
-// app.use(getNameLocals);
+app.use(session(sessionConfig));
+
 app.use(express.urlencoded({ extended: true }));
+
+app.use(express.json());
 
 /*  сохраняем в обьект res.locals.username
 имя пользователя для использования username в layout.hbs */
 app.use((req, res, next) => {
   res.locals.username = req.session?.user?.name;
+  res.locals.data = req.session?.user?.createdAt;
 
   console.log('\n\x1b[33m', 'req.session.user :', req.session.user);
   console.log('\x1b[35m', 'res.locals.username:', res.locals.username);
@@ -64,6 +72,11 @@ app.use((req, res, next) => {
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use('/main', mainRoutes);
+app.use('/lk', lkRouter);
+app.use('/addProduct', addProductRouter);
+app.use('/promo', promoRouter);
+app.use('/product', oneProdRouter);
+app.use('/cart', cartRouter);
 
 // * роут если нет страницы
 app.use(notFoundPage);

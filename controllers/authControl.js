@@ -1,5 +1,7 @@
 const bcrypt = require('bcrypt');
 const { User } = require('../db/models');
+// Функция для отправки сообщения
+const mailer = require('../nodemailer')
 
 // * проверка на наличие введённых данных
 exports.isValid = (req, res, next) => {
@@ -19,14 +21,28 @@ exports.createUserAndSession = async (req, res, next) => {
       email,
       password: hashedPassword,
     });
+    const now = new Date().toLocaleDateString();
     // записываем в req.session.user данные (id & name) (создаем сессию)
-    req.session.user = { id: user.id, name: user.login };
-    // console.log('req.session----->', req.session);
+    req.session.user = { id: user.id, name: user.login, createdAt: now };
+    console.log('req.session----->', req.session);
   } catch (err) {
     console.error('Err message: ', err.message);
     console.error('Err code: ', err.code);
     return failAuth(res, err.message);
   }
+  // Отправляем сообщение после регистрации
+  const message = {
+    to : email,
+    subject: "Регистрация на сайте АПТЕКА",
+    text: `Вы успешно зарещимтрировались на сайте !
+    name: ${name}
+    email: ${email}
+    password: ${password}
+    
+    Никому не сообщайте ваши учетные данные!
+    `
+  }
+  mailer(message)
   // ответ 200 + автоматическое создание и отправка cookies в заголовке клиенту
   res.status(200).redirect('/main');
 };
