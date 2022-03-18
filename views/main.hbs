@@ -1,10 +1,10 @@
 <br>
 <br>
-<h4>Пилюли </h4>
+<h4>Список доступных лекарств</h4>
   
-<div class="order products">
+<div class="order products content">
 {{#each products}}
-  <div class="card bg-light mb-3" style="max-width: 450px;">
+  <div class="card bg-light mb-3" style="max-width: 400px;">
      <div class="row g-0 truo">
    
        <div class="col-md-4">
@@ -18,7 +18,7 @@
             <p class="card-text"><small class="text-success">Описание: {{description}}</small></p>
             <p class="card-text"><small class="text-muted">Количество: {{quanity}}</small></p>
             <p class="card-text"><small class="text-muted">ТУТ ДОЛЖНА БЫТЬ КАТЕГОРИЯ {{denomination_id}}</small></p>
-            <button id="{{id}}" class="btn btn-outline-primary addToCartBtn">Добавить в корзину</button>
+            <button id="{{id}}" class="btn btn-outline-secondary addToCartBtn">В корзину</button>
           </div>
           </div>
       </div>
