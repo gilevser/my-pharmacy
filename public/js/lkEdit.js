@@ -6,9 +6,9 @@ editForm.addEventListener('submit', async (e) => {
   const name = e.target.editName.value;
   const email = e.target.editEmail.value;
   const password = e.target.editPassword.value;
-  const img = e.target.editImg.value;
+  // const img = e.target.editImg.value;
   const bodyObj = {
-    name, email, password, img,
+    name, email, password,
   };
   console.log('editor!!!', e.target.id);
 
@@ -20,5 +20,14 @@ editForm.addEventListener('submit', async (e) => {
       },
       body: JSON.stringify(bodyObj),
     });
+
+    const info = await response.json();
+    console.log(info.ok, 'проверка инфо ок');
+    //   // const info = await response.json();
+    if (info.ok) {
+      return window.location.assign('/auth/signin');
+      // console.log('response.status :', response.status);
+      // const data = await response.json();
+    }
   }
 });
