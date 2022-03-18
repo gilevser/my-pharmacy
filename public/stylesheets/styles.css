@@ -47,3 +47,16 @@ a {
 /* .cart-is-empty {
   visibility: visible;
 } */
+
+.cart-content {
+  display: flex;
+  align-items: stretch;
+}
+
+.card {
+  min-height: 400px;
+}
+
+.confirmCartBtn {
+margin: 0 20px;
+}
