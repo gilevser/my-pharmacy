@@ -17,24 +17,32 @@ router.put('/:id', async (req, res) => {
   const {
     name, email, password,
   } = req.body;
+
   try {
     const user = await User.findOne({ where: { id } });
     const hashedPassword = await bcrypt.hash(password, 10);
+
     user.set({
       login: name, email, password: hashedPassword,
     });
+
     await user.save();
+
     req.session.destroy((err) => {
       if (err) return next(err);
       res.clearCookie('Cookie');
       console.log('это будет наш юзер===>', user);
       // res.sendStatus(200); // * Жизненный цикл заканчивается у ручки
-    // res.status(200).end();  // * то же самое
+      // res.status(200); // * то же самое
+      res.json({
+        ok: true,
+      });
     });
   } catch (err) {
-    console.error('Err message: ', err.message);
-    console.error('Err code: ', err.code);
+    // console.error('Err message: ', err.message);
+    // console.error('Err code: ', err.code);
     return failAuth(res, err.message);
   }
 });
+
 module.exports = router;
