@@ -7,8 +7,18 @@ const allProd = async () => {
   const allProductsArr = allProducts.products;
 
   const addedItems = [];
+  let itemToAdd;
   for (const item of itemsArray) {
-    const itemToAdd = allProductsArr.find((product) => product.id == item);
+    if (item.includes('saleId')) {
+      itemToAdd = allProductsArr.find((product) => product.id == item.slice(8));
+      itemToAdd.title = `По акции: ${itemToAdd.title}`;
+      itemToAdd.price = 0;
+      // itemToAdd.id = item;
+      // console.log(itemToAdd);
+    } else {
+      itemToAdd = allProductsArr.find((product) => product.id == item);
+    }
+    // const itemToAdd = allProductsArr.find((product) => product.id == item);
     if (!addedItems.includes(itemToAdd)) {
       // console.log(itemToAdd);
       itemToAdd.quantityInCart = 1;
