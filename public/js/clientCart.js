@@ -113,8 +113,28 @@ const allProd = async () => {
 
 allProd();
 
-const clearCart = document.querySelector('.clearCart');
-clearCart.addEventListener('click', (e) => {
-  localStorage.clear();
-  window.location.reload();
-});
+const clearCartDiv = document.getElementById('cart-btns-div');
+if (itemsArray.length) {
+  // если есть элементы в корзине создаем "очистить корзину"
+  const clearCartBtn = document.createElement('button');
+  clearCartBtn.className = 'clearCartBtn btn btn-outline-danger';
+  clearCartBtn.innerHTML = 'Очистить корзину';
+  clearCartDiv.appendChild(clearCartBtn);
+
+  clearCartBtn.addEventListener('click', (e) => {
+    localStorage.clear();
+    window.location.reload();
+  });
+
+  // если есть элементы в корзине создаем "Оформить заказ"
+  const confirmCartBtn = document.createElement('button');
+  confirmCartBtn.className = 'confirmCartBtn btn btn-outline-success';
+  confirmCartBtn.innerHTML = 'Оформить заказ';
+  clearCartDiv.appendChild(confirmCartBtn);
+
+  confirmCartBtn.addEventListener('click', (e) => {
+    alert('Ваш заказ успешно оформлен! Наш администратор свяжется с вами в ближайшее время');
+    localStorage.clear();
+    window.location.reload();
+  });
+}
