@@ -3,9 +3,9 @@
   position: fixed;
   left: auto;
   top: 0;
-  border-radius: 8px;
-  padding-left: 40px;
-  padding-right: 40px;
+  left: 200px;
+  right: 200px;
+  height: 60px;
   background-color: #f8f9fa;
   display: flex;
   flex-direction: row;

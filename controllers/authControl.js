@@ -66,8 +66,10 @@ exports.checkUserAndCreateSession = async (req, res, next) => {
     const isValidPass = await bcrypt.compare(password, user.password);
     if (!isValidPass) return failAuth(res, 'Неправильное имя\\пароль');
     // записываем в req.session.user данные (id & name) (создаем сессию)
-    req.session.user = { id: user.id, name: user.login, email: user.email, isAdmin: user.admin };
-    console.log('IsADMIN',req.session.user.isAdmin)
+    req.session.user = {
+      id: user.id, name: user.login, email: user.email, isAdmin: user.admin,
+    };
+    console.log('IsADMIN', req.session.user.isAdmin);
     // console.log('req.sessionAAAAAAAAAAAAAAa----->', req.session);
   } catch (err) {
     console.error('Err message: ', err.message);
@@ -79,10 +81,13 @@ exports.checkUserAndCreateSession = async (req, res, next) => {
 };
 // * закрываем сессию
 exports.destroySession = (req, res, next) => {
-  // eslint-disable-next-line consistent-return
-  req.session.destroy((err) => {
-    if (err) return next(err);
-    res.clearCookie('Cookie');
-    res.redirect('/main');
-  });
+  try {
+    req.session.destroy((err) => {
+      if (err) return next(err);
+      res.clearCookie('Cookie');
+      next();
+    });
+  } catch (err) {
+    console.error(err);
+  }
 };
