@@ -7,7 +7,7 @@
 <br/>
 
 <div class="greetingCard">
-  <img class="userPhoto" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/2048px-User_icon_2.svg.png" class="card-img-top" alt="...">
+  {{!-- <img class="userPhoto" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/2048px-User_icon_2.svg.png" class="card-img-top" alt="..."> --}}
   <div class="greetingText">
     <h3 class="card-body">Привет, {{username}} </h3>
     <h3 class="card-body">Пользователь с нами c {{data}} </h3>
@@ -33,9 +33,9 @@
                 <h5 class="card-title text-left"> {{title}} </h5>
                 <p class="card-text text-left">{{price}} рублей</p>
               </div>
-              <div>
-                <button class="btn btn-primary">Добавить в корзину</button>
-              </div>
+              {{!-- <div> --}}
+                {{!-- <button class="btn btn-primary">Добавить в корзину</button> --}}
+              {{!-- </div> --}}
           </div>
         {{/each}} 
   </div>
@@ -53,12 +53,12 @@
                 <h5 class="card-title text-left"> {{title}} </h5>
                 <p class="card-text text-left">{{price}} рублей</p>
               </div>
-              <div>
+              {{!-- <div>
                 <button class="btn btn-primary">Добавить в корзину</button>
-              </div>
+              </div> --}}
           </div>
         {{/each}} 
-          <button class="btn btn-primary">Повторить заказ</button>
+          {{!-- <button class="btn btn-primary">Повторить заказ</button> --}}
   </div>
       
   
