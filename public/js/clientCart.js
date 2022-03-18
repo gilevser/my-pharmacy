@@ -1,12 +1,14 @@
 /* eslint-disable no-restricted-syntax */
 console.log('hellou', itemsArray);
 
+const addedItems = [];
+
 const allProd = async () => {
   const productsResult = await fetch('/cart/fetch', {});
   const allProducts = await productsResult.json();
   const allProductsArr = allProducts.products;
 
-  const addedItems = [];
+
   const addedItemsTitles = [];
 
   for (const item of itemsArray) {
@@ -18,9 +20,9 @@ const allProd = async () => {
         img: findItem.img,
         description: findItem.description,
       };
-      console.log(saleItemToAdd);
+      // console.log(saleItemToAdd);
       if (!addedItemsTitles.includes(saleItemToAdd.title)) {
-        saleItemToAdd.salePrice = 0;
+        saleItemToAdd.price = 0;
         saleItemToAdd.saleQuantityInCart = 1;
         addedItemsTitles.push(saleItemToAdd.title);
         addedItems.push(saleItemToAdd);
@@ -37,7 +39,7 @@ const allProd = async () => {
           <p class="card-text">${saleItemToAdd.salePrice} руб./шт.</p>
           <p class="card-text"><small class="text-success">Описание: ${saleItemToAdd.description}</small></p>
           <p id="saleQuantityInCart-${saleItemToAdd.id}" class="card-text"><small class="text-muted">Количество в корзине: ${saleItemToAdd.saleQuantityInCart} шт.</small></p>
-          <p id="salePrice-${saleItemToAdd.id}"class="card-text">Стоимость: ${saleItemToAdd.salePrice * saleItemToAdd.saleQuantityInCart} руб.</p>
+          <p name="price0" id="salePrice-${saleItemToAdd.id}"class="card-text">${saleItemToAdd.salePrice * saleItemToAdd.saleQuantityInCart} руб.!!!</p>
         </div>
         </div>
       </div>
@@ -78,10 +80,10 @@ const allProd = async () => {
         </div>
         </div>`;
         document.getElementById('cart-items').appendChild(newCartItem);
-        console.log(itemToAdd);
+        // console.log(itemToAdd);
       } else if (addedItemsTitles.includes(itemToAdd.title)) {
         const itemToAdd2 = addedItems.filter((product) => product.title === itemToAdd.title)[0];
-        console.log(itemToAdd2);
+        // console.log(itemToAdd2);
         itemToAdd2.quantityInCart += 1;
         const x = document.getElementById(`quantityInCart-${itemToAdd2.id}`);
         x.innerHTML = `<p id="quantityInCart-${itemToAdd2.id}" class="card-text"><small class="text-muted">Количество в корзине: ${itemToAdd2.quantityInCart} шт.</small></p>`;
@@ -90,8 +92,8 @@ const allProd = async () => {
       }
     }
   }
-  console.log(addedItemsTitles);
-  console.log(addedItems);
+  // console.log(addedItemsTitles);
+
 
   let totalQuantity = 0;
   addedItems.forEach((element) => {
@@ -132,9 +134,20 @@ if (itemsArray.length) {
   confirmCartBtn.innerHTML = 'Оформить заказ';
   clearCartDiv.appendChild(confirmCartBtn);
 
-  confirmCartBtn.addEventListener('click', (e) => {
+  confirmCartBtn.addEventListener('click', async (e) => {
     alert('Ваш заказ успешно оформлен! Наш администратор свяжется с вами в ближайшее время');
-    localStorage.clear();
-    window.location.reload();
+    console.log(addedItems);
+    const response = await fetch('/cart/checkout' , {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(addedItems)
+    })
+
+
+
+    // localStorage.clear();
+    // window.location.reload();
   });
 }
