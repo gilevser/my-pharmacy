@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Sale, Product, ProductSale} = require('../db/models')
+const {Denomination,Sale, Product, ProductSale} = require('../db/models')
 
 // *Страница с акциями
 router.get('/', async (req, res) => {
@@ -20,8 +20,15 @@ router.get('/', async (req, res) => {
         //Получаем все акционные товары
         const allPromoProduct = await ProductSale.findAll({include: [{
                 model: Product,
-                attributes: ['title', 'description', 'img']
+                attributes: ['title', 'description', 'img', 'denomination_id' ]
             }]})
+
+        //Получаем все категорими
+        const allDenomination = await Denomination.findAll({raw:true})
+
+        //добавляем категория в товары
+
+
         // Товары участвующие в  акции
         const actualPromoProduct = allPromoProduct.filter( product => product['sale_id'] === actualSale[0].id)
         const previousPromoProduct = allPromoProduct.filter( product => product['sale_id'] === actualSale[0].id - 1)
