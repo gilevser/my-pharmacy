@@ -4,6 +4,7 @@ const path = require('path');
 const morgan = require('morgan');
 const hbs = require('hbs');
 const FileStore = require('session-file-store')(session);
+// const multer = require('multer');
 require('dotenv').config();
 
 // * проверка подключения базы данных
@@ -22,7 +23,7 @@ const oneProdRouter = require('./routes/oneProduct');
 const lkEditRouter = require('./routes/lkEdit');
 
 // * импорт контроллеров
-const notFoundPage = require('./controllers/notfoundpage'); //тупой копипаст - плохо!:))
+const notFoundPage = require('./controllers/notfoundpage'); // тупой копипаст - плохо!:))
 
 const { PORT } = process.env;
 
@@ -41,6 +42,17 @@ const sessionConfig = {
     httpOnly: true,
   },
 };
+
+// const fileStorageEngine = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     cb(null, './public/images');
+//   },
+//   filename: (req, file, cb) => {
+//     cb(null, `${Date.now()}aaa${file.originalname}`);
+//   },
+// });
+// const upload = multer({ storage: fileStorageEngine });
+
 
 app.set('view engine', 'hbs');
 hbs.registerPartials(`${__dirname}/views/partials`);
