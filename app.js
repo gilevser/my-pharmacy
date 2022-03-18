@@ -65,6 +65,7 @@ app.use((req, res, next) => {
   res.locals.data = req.session?.user?.createdAt;
   res.locals.id = req.session?.user?.id;
   res.locals.userEmail = req.session?.user?.email;
+  res.locals.isAdmin = req.session?.user?.isAdmin
   // res.locals.userEmail = req.session?.user?.email;
   // console.log(req.session?.user?.email, 'req.session?.user?.email лежит тут <=====');
 

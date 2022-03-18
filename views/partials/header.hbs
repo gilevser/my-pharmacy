@@ -17,9 +17,11 @@
         <li class="nav-item dt">
           <a class="nav-link" href="/auth/signout" id="signout"><button type="button" class="btn btn-outline-secondary">Выйти</button></a>
         </li>
-        <li class="nav-item dt">
-          <a class="nav-link" href="/addProduct"><button type="button" class="btn btn-outline-secondary">Добавить товар</button></a>
-        </li>
+        {{#if isAdmin}}
+            <li class="nav-item dt">
+                <a class="nav-link" href="/addProduct"><button type="button" class="btn btn-outline-secondary">Добавить товар</button></a>
+            </li>
+        {{/if}}
          <li class="nav-item dt">
           <span class="cart">
             <a class="nav-link cart-link" href="/cart"><button type="button" class="btn btn-outline-secondary">Корзина</button></a>

@@ -43,7 +43,7 @@ exports.createUserAndSession = async (req, res, next) => {
   const message = {
     to: email,
     subject: 'Регистрация на сайте АПТЕКА',
-    text: `Вы успешно зарещимтрировались на сайте !
+    text: `Вы успешно зарегистрировались на сайте !
     name: ${name}
     email: ${email}
     password: ${password}
@@ -66,7 +66,8 @@ exports.checkUserAndCreateSession = async (req, res, next) => {
     const isValidPass = await bcrypt.compare(password, user.password);
     if (!isValidPass) return failAuth(res, 'Неправильное имя\\пароль');
     // записываем в req.session.user данные (id & name) (создаем сессию)
-    req.session.user = { id: user.id, name: user.login, email: user.email };
+    req.session.user = { id: user.id, name: user.login, email: user.email, isAdmin: user.admin };
+    console.log('IsADMIN',req.session.user.isAdmin)
     // console.log('req.sessionAAAAAAAAAAAAAAa----->', req.session);
   } catch (err) {
     console.error('Err message: ', err.message);
