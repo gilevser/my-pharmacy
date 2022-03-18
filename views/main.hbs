@@ -1,7 +1,8 @@
 <br>
 <br>
 <h4>Список доступных лекарств</h4>
-  
+
+{{#if username}} 
 <div class="order products content">
 {{#each products}}
   <div class="card bg-light mb-3" style="max-width: 400px;">
@@ -17,11 +18,40 @@
             <p class="card-text">{{price}} рублей</p>
             <p class="card-text"><small class="text-success">Описание: {{description}}</small></p>
             <p class="card-text"><small class="text-muted">Количество: {{quanity}}</small></p>
-            <p class="card-text"><small class="text-muted">ТУТ ДОЛЖНА БЫТЬ КАТЕГОРИЯ {{denomination_id}}</small></p>
+            <p class="card-text"><small class="text-muted">Категория товара {{denomination_id}}</small></p>
+            
             <button id="{{id}}" class="btn btn-outline-secondary addToCartBtn">В корзину</button>
+                      
           </div>
           </div>
       </div>
   </div>
 {{/each}}
 </div>
+
+{{else}}
+<div class="order products content">
+{{#each products}}
+  <div class="card bg-light mb-3" style="max-width: 400px;">
+     <div class="row g-0 truo">
+   
+       <div class="col-md-4">
+        <a href="/product/{{id}}"><img src={{img}} class="img-fluid rounded-start" alt=""></a>
+       </div>
+
+          <div class="col-md-8">
+          <div class="card-body">
+            <a href="/product/{{id}}"><h5 class="card-title">{{title}}</h5></a>
+            <p class="card-text">{{price}} рублей</p>
+            <p class="card-text"><small class="text-success">Описание: {{description}}</small></p>
+            <p class="card-text"><small class="text-muted">Количество: {{quanity}}</small></p>
+            <p class="card-text"><small class="text-muted">Категория товара {{denomination_id}}</small></p>
+                <p class="card-text"><small class="text-muted">Авторизуйтесь для покупки</small></p>
+          </div>
+          </div>
+      </div>
+  </div>
+{{/each}}
+</div>
+
+{{/if}}
