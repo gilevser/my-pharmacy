@@ -10,6 +10,10 @@ exports.isValid = (req, res, next) => {
   else res.status(401).end();
 };
 
+function failAuth(res, err) {
+  return res.status(401).json({ err });
+}
+
 // * создаем пользователя и сессию ___ регистрация
 exports.createUserAndSession = async (req, res, next) => {
   const { name, email, password } = req.body;
@@ -23,8 +27,13 @@ exports.createUserAndSession = async (req, res, next) => {
     });
     const now = new Date().toLocaleDateString();
     // записываем в req.session.user данные (id & name) (создаем сессию)
-    req.session.user = { id: user.id, name: user.login, createdAt: now };
-    console.log('req.session----->', req.session);
+    req.session.user = {
+      id: user.id,
+      name: user.login,
+      email: user.email,
+      createdAt: now,
+    };
+    // console.log('req.session----->', req.session);
   } catch (err) {
     console.error('Err message: ', err.message);
     console.error('Err code: ', err.code);
@@ -57,8 +66,8 @@ exports.checkUserAndCreateSession = async (req, res, next) => {
     const isValidPass = await bcrypt.compare(password, user.password);
     if (!isValidPass) return failAuth(res, 'Неправильное имя\\пароль');
     // записываем в req.session.user данные (id & name) (создаем сессию)
-    req.session.user = { id: user.id, name: user.login };
-    console.log('req.session----->', req.session);
+    req.session.user = { id: user.id, name: user.login, email: user.email };
+    // console.log('req.sessionAAAAAAAAAAAAAAa----->', req.session);
   } catch (err) {
     console.error('Err message: ', err.message);
     console.error('Err code: ', err.code);
@@ -76,6 +85,3 @@ exports.destroySession = (req, res, next) => {
     res.redirect('/main');
   });
 };
-function failAuth(res, err) {
-  return res.status(401).json({ err });
-}
