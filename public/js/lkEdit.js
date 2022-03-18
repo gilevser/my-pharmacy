@@ -20,5 +20,7 @@ editForm.addEventListener('submit', async (e) => {
       },
       body: JSON.stringify(bodyObj),
     });
+    const info = await response.json();
+    
   }
 });
