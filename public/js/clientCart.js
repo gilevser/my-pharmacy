@@ -37,7 +37,7 @@ const allProd = async () => {
           <p class="card-text">${saleItemToAdd.salePrice} руб./шт.</p>
           <p class="card-text"><small class="text-success">Описание: ${saleItemToAdd.description}</small></p>
           <p id="saleQuantityInCart-${saleItemToAdd.id}" class="card-text"><small class="text-muted">Количество в корзине: ${saleItemToAdd.saleQuantityInCart} шт.</small></p>
-          <p id="salePrice-${saleItemToAdd.id}"class="card-text">${saleItemToAdd.salePrice * saleItemToAdd.saleQuantityInCart} руб.</p>
+          <p id="salePrice-${saleItemToAdd.id}"class="card-text">Стоимость: ${saleItemToAdd.salePrice * saleItemToAdd.saleQuantityInCart} руб.</p>
         </div>
         </div>
       </div>
@@ -72,7 +72,7 @@ const allProd = async () => {
             <p class="card-text">${itemToAdd.price} руб./шт.</p>
             <p class="card-text"><small class="text-success">Описание: ${itemToAdd.description}</small></p>
             <p id="quantityInCart-${itemToAdd.id}" class="card-text"><small class="text-muted">Количество в корзине: ${itemToAdd.quantityInCart} шт.</small></p>
-            <p id="price-${itemToAdd.id}"class="card-text">${itemToAdd.price * itemToAdd.quantityInCart} руб.</p>
+            <p id="price-${itemToAdd.id}"class="card-text">Стоимость: ${itemToAdd.price * itemToAdd.quantityInCart} руб.</p>
           </div>
           </div>
         </div>
@@ -86,7 +86,7 @@ const allProd = async () => {
         const x = document.getElementById(`quantityInCart-${itemToAdd2.id}`);
         x.innerHTML = `<p id="quantityInCart-${itemToAdd2.id}" class="card-text"><small class="text-muted">Количество в корзине: ${itemToAdd2.quantityInCart} шт.</small></p>`;
         const y = document.getElementById(`price-${itemToAdd2.id}`);
-        y.innerHTML = `<p id="price-${itemToAdd2.id}"class="card-text">${itemToAdd2.price * itemToAdd2.quantityInCart} руб.</p>`;
+        y.innerHTML = `<p id="price-${itemToAdd2.id}"class="card-text">Стоимость: ${itemToAdd2.price * itemToAdd2.quantityInCart} руб.</p>`;
       }
     }
   }
