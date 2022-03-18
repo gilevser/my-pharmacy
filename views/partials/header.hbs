@@ -6,24 +6,24 @@
 
     <nav class="head">
         {{#if username}} {{! ключ username ищется в res.locals}}
+        <li class="nav-item dt1">
+          <a class="nav-link link-secondary" href="#">Привет, {{username}}</a>
+        </li>
         <li class="nav-item dt">
-          <a class="nav-link" href="#">Привет, {{username}}</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/promo">Акции</a>
+          <a class="nav-link" href="/promo"><button type="button" class="btn btn-outline-secondary">Акции</button></a>
         </li> 
-        <li class="nav-item">
-          <a class="nav-link" href="/lk">Личный кабинет</a>
+        <li class="nav-item dt">
+          <a class="nav-link" href="/lk"><button type="button" class="btn btn-outline-secondary">Личный кабинет</button></a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/auth/signout" id="signout">Выйти</a>
+        <li class="nav-item dt">
+          <a class="nav-link" href="/auth/signout" id="signout"><button type="button" class="btn btn-outline-secondary">Выйти</button></a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/addProduct">Добавить товар</a>
+        <li class="nav-item dt">
+          <a class="nav-link" href="/addProduct"><button type="button" class="btn btn-outline-secondary">Добавить товар</button></a>
         </li>
-         <li class="nav-item">
+         <li class="nav-item dt">
           <span class="cart">
-            <a class="nav-link cart-link" href="/cart">Корзина</a>
+            <a class="nav-link cart-link" href="/cart"><button type="button" class="btn btn-outline-secondary">Корзина</button></a>
             <span class="cart-count">0</span>
           </span>
         </li> 
@@ -34,9 +34,6 @@
         <li class="nav-item p-2 gx-5 dt">
           <a class="nav-link" href="/auth/new"><button type="button" class="btn btn-outline-secondary">Зарегистрироваться</button></a>
         </li>
-        <li class="nav-item p-2 gx-5"">
-          <a class="nav-link" href="??????">Акции</a>
-        </li> 
         {{/if}}
     
       </ul>
